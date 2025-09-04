@@ -1,0 +1,44 @@
+name: deploy staging
+
+on:
+  push:
+    branches: [ main ]
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run stylelint
+      - run: npm run prettier -- --check
+      - run: npm run type-check
+      - run: npm run build
+
+  deploy:
+    needs: verify
+    runs-on: ubuntu-latest
+    environment:
+      name: staging
+      url: https://staging.stanislavstranger.ru
+    concurrency:
+      group: staging
+      cancel-in-progress: true
+    steps:
+      - name: SSH Command
+        uses: D3rHase/ssh-command-action@v0.2.2
+        with:
+          host: ${{ secrets.STAGING_SSH_HOST }}
+          user: ${{ secrets.STAGING_SSH_USERNAME }}
+          private_key: ${{ secrets.STAGING_SSH_PRIVATE_KEY }}
+          host_fingerprint: ${{ secrets.STAGING_SSH_FINGERPRINT }}
+          command: source ~/.nvm/nvm.sh; ~/deploy.sh
