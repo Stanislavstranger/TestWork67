@@ -1,0 +1,61 @@
+{
+  "extends": [
+    "stylelint-config-standard-scss",
+    "stylelint-config-clean-order",
+    "stylelint-config-prettier-scss"
+  ],
+  "plugins": ["stylelint-scss", "stylelint-order", "@stylistic/stylelint-plugin"],
+  "rules": {
+    "at-rule-no-unknown": null,
+    "scss/at-rule-no-unknown": true,
+    "selector-pseudo-class-no-unknown": [true, { "ignorePseudoClasses": ["global", "local"] }],
+
+    "@stylistic/indentation": 2,
+    "@stylistic/string-quotes": "single",
+    "@stylistic/color-hex-case": "lower",
+
+    "alpha-value-notation": "percentage",
+    "length-zero-no-unit": true,
+    "color-named": "never",
+    "number-max-precision": 6,
+
+    "max-nesting-depth": 3,
+    "selector-max-id": 0,
+    "selector-max-compound-selectors": 3,
+
+    "property-no-vendor-prefix": true,
+    "value-no-vendor-prefix": true,
+    "selector-no-vendor-prefix": true,
+
+    "declaration-empty-line-before": [
+      "never",
+      { "ignore": ["after-declaration", "inside-single-line-block"] }
+    ],
+    "rule-empty-line-before": [
+      "always-multi-line",
+      { "except": ["first-nested"], "ignore": ["after-comment"] }
+    ],
+
+    "declaration-block-no-redundant-longhand-properties": [
+      true,
+      { "ignoreShorthands": ["/grid/"] }
+    ],
+
+    "order/order": [
+      "dollar-variables",
+      "custom-properties",
+      "declarations",
+      { "type": "at-rule", "name": "supports" },
+      { "type": "at-rule", "name": "media" },
+      "rules"
+    ]
+  },
+  "ignoreFiles": [
+    "**/*.min.css",
+    "**/*.generated.css",
+    "node_modules/**",
+    ".next/**",
+    "dist/**",
+    "build/**"
+  ]
+}
