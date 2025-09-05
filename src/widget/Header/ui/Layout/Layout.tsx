@@ -33,8 +33,12 @@ export function Layout({
     <header className={style.header}>
       <div className={style.topBar}>
         <div className={style.container}>
-          <ContactInfo items={contactItems} />
-          <div className={style.topBarRight}>{profile}</div>
+          <div className={style.topBarContent}>
+            {' '}
+            {}
+            <ContactInfo items={contactItems} />
+            <div className={style.topBarRight}>{profile}</div>
+          </div>
         </div>
       </div>
 

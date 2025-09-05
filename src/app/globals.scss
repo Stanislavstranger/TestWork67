@@ -1,3 +1,5 @@
+@use '@/app/mixins.scss' as *;
+
 :root {
   --bg: #0f1115;
   --bg-panel: #151922;
@@ -14,7 +16,7 @@
     --bg-panel: #2d2d2d;
     --logo: #fff;
     --text: #0f1115;
-    --muted: #a9b0c3;
+    --muted: #757e95;
     --accent: #e11d48;
     --border: #4b5563;
   }
@@ -32,6 +34,7 @@ body {
   display: flex;
   flex-direction: column;
 
+  height: 100vh;
   margin: 0;
   padding: 0;
 
@@ -78,7 +81,7 @@ main {
   }
 }
 
-@media (width <=768px) {
+@include mobile {
   .grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -88,4 +91,8 @@ main {
   .grid {
     grid-template-columns: 1fr;
   }
+}
+
+body.no-scroll {
+  overflow: hidden;
 }

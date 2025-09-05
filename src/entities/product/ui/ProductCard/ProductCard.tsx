@@ -14,14 +14,16 @@ export default function ProductCard({ product }: { product: Product }) {
 
   return (
     <div className={s.card}>
-      <Image
-        src={product.thumbnail}
-        alt={product.title}
-        width={300}
-        height={300}
-        style={{ height: 'auto' }}
-        priority
-      />
+      <div className={s.imageWrapper}>
+        <Image
+          src={product.thumbnail}
+          alt={product.title}
+          width={300}
+          height={300}
+          style={{ height: 'auto' }}
+          priority
+        />
+      </div>
       <div className={s.title}>{product.title}</div>
       <div className={s.category}>{product.category}</div>
       <div className={s.price}>${product.price.toFixed(2)}</div>

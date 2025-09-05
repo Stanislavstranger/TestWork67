@@ -18,17 +18,27 @@ const navLinks = [
   { href: '/accessories', label: 'Accessories' },
 ];
 
-export function MainNav() {
+export function MainNav({
+  isOpen,
+  setIsOpen,
+}: {
+  isOpen: boolean;
+  setIsOpen: (isOpen: boolean) => void;
+}) {
   const pathname = usePathname();
 
   return (
     <nav>
-      <ul className={style.list}>
+      <ul className={clsx(style.list, { [style.open]: isOpen })}>
         {navLinks.map((link) => {
           const isActive = pathname === link.href;
           return (
             <li key={link.label}>
-              <Link href={link.href} className={clsx(style.link, isActive && style.active)}>
+              <Link
+                href={link.href}
+                className={clsx(style.link, isActive && style.active)}
+                onClick={() => setIsOpen(false)}
+              >
                 {link.label}
               </Link>
             </li>

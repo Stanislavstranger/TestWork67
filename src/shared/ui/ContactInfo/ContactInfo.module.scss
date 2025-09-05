@@ -1,6 +1,81 @@
+@use '@/app/mixins.scss' as *;
+
+.contactInfoWrapper {
+  position: relative;
+
+  @media (width >=769px) {
+    .toggleButton {
+      display: none;
+    }
+  }
+}
+
+.toggleButton {
+  cursor: pointer;
+
+  display: none;
+
+  padding: 8px 12px;
+  border: 1px solid var(--white);
+  border-radius: 4px;
+
+  color: var(--white);
+
+  background: none;
+
+  @include mobile {
+    display: block;
+  }
+}
+
+.collapsibleContent {
+  @include mobile {
+    position: absolute;
+    z-index: 100;
+    top: 100%;
+    left: 0;
+
+    display: none;
+
+    min-width: 180px;
+    padding: 10px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+
+    background-color: var(--bg);
+    box-shadow: 0 4px 6px rgb(0 0 0 / 10%);
+  }
+
+  @media (width >=769px) {
+    position: static;
+    z-index: auto;
+
+    display: flex;
+
+    min-width: auto;
+    padding: 0;
+    border: none;
+
+    background-color: transparent;
+    box-shadow: none;
+  }
+
+  &.open {
+    @include mobile {
+      display: block;
+    }
+  }
+}
+
 .contacts {
   display: flex;
   gap: 20px;
+
+  @include mobile {
+    flex-direction: column;
+    gap: 10px;
+    padding-top: 10px;
+  }
 }
 
 .contactItem {
@@ -14,7 +89,7 @@
 }
 
 .link {
-  color: #fff;
+  color: var(--white);
   text-decoration: none;
 
   &:hover {
