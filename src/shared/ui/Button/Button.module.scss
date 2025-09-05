@@ -1,0 +1,25 @@
+.button {
+  cursor: pointer;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 10px 16px;
+  border: 1px solid #111827;
+  border-radius: 10px;
+
+  color: #fff;
+
+  background: #111827;
+}
+
+.button:disabled {
+  cursor: default;
+  opacity: 60%;
+}
+
+.secondary {
+  color: #111827;
+  background: #fff;
+}

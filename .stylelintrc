@@ -48,8 +48,26 @@
       { "type": "at-rule", "name": "supports" },
       { "type": "at-rule", "name": "media" },
       "rules"
+    ],
+
+    "selector-class-pattern": [
+      "^[a-z][a-z0-9-]*(?:__[a-z0-9-]+)?(?:--[a-z0-9-]+)?$",
+      { "message": "Expected class selector to be kebab-case (optionally BEM: __ or --)." }
     ]
   },
+
+  "overrides": [
+    {
+      "files": ["**/*.module.scss"],
+      "rules": {
+        "selector-class-pattern": [
+          "^[a-z][a-zA-Z0-9]*$",
+          { "message": "Expected class selector to be camelCase in CSS Modules." }
+        ]
+      }
+    }
+  ],
+
   "ignoreFiles": [
     "**/*.min.css",
     "**/*.generated.css",

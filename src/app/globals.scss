@@ -1,34 +1,53 @@
 :root {
-  --background: #fff;
-  --foreground: #171717;
+  --bg: #0f1115;
+  --bg-panel: #151922;
+  --white: #e7eaf1;
+  --text: #0f1115;
+  --muted: #6b7280;
+  --accent: #e11d48;
+  --border: #e5e7eb;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --bg: #1a1a1a;
+    --bg-panel: #2d2d2d;
+    --logo: #fff;
+    --text: #0f1115;
+    --muted: #a9b0c3;
+    --accent: #e11d48;
+    --border: #4b5563;
   }
-}
-
-html,
-body {
-  overflow-x: hidden;
-  max-width: 100vw;
-}
-
-body {
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: var(--foreground);
-
-  background: var(--background);
 }
 
 * {
   box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+
   margin: 0;
   padding: 0;
+
+  font-family:
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    Helvetica,
+    Arial,
+    'Apple Color Emoji',
+    'Segoe UI Emoji';
+  color: var(--text);
+
+  background: var(--bg);
 }
 
 a {
@@ -36,8 +55,37 @@ a {
   text-decoration: none;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+main {
+  flex-grow: 1;
+  background-color: #fff;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+@media (width <=1024px) {
+  .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (width <=768px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (width <=480px) {
+  .grid {
+    grid-template-columns: 1fr;
   }
 }

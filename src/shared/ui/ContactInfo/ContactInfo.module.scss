@@ -1,0 +1,23 @@
+.contacts {
+  display: flex;
+  gap: 20px;
+}
+
+.contactItem {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+
+  svg {
+    color: var(--accent);
+  }
+}
+
+.link {
+  color: #fff;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

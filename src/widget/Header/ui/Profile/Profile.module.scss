@@ -1,0 +1,44 @@
+@use '@/app/mixins.scss' as *;
+
+.profile {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+
+  color: #fff;
+  text-decoration: none;
+
+  svg {
+    color: var(--accent);
+  }
+}
+
+.name {
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.logout {
+  cursor: pointer;
+
+  padding: 0;
+  border: none;
+
+  font-size: 12px;
+  font-weight: 600;
+  color: #fff;
+  text-decoration: none;
+
+  background: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+@include mobile {
+  .profile {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
