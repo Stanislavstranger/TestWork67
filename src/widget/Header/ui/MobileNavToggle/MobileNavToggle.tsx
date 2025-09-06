@@ -16,6 +16,7 @@ export function MobileNavToggle() {
   return (
     <>
       <button
+        aria-label={isOpen ? 'Close navigation menu' : 'Open navigation menu'}
         className={clsx(style.hamburger, { [style.open]: isOpen })}
         onClick={() => setIsOpen(!isOpen)}
       >
@@ -24,7 +25,11 @@ export function MobileNavToggle() {
         <span className={style.hamburgerLine}></span>
       </button>
       <div className={clsx(style.navWrapper, { [style.open]: isOpen })}>
-        <button className={style.closeButton} onClick={() => setIsOpen(false)}>
+        <button
+          aria-label="Close navigation menu"
+          className={style.closeButton}
+          onClick={() => setIsOpen(false)}
+        >
           &times;
         </button>
         <MainNav isOpen={isOpen} setIsOpen={setIsOpen} />
