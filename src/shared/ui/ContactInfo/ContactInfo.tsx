@@ -64,8 +64,6 @@ export function ContactInfo({ items }: { items: ContactItem[] }) {
                   className={style.link}
                   onClick={() => setIsOpen(false)}
                 >
-                  {' '}
-                  {}
                   {linkContent}
                 </a>
               );

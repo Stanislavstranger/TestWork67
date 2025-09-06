@@ -3,6 +3,7 @@
 import { isAxiosError } from 'axios';
 import { useRouter } from 'next/navigation';
 import { FormEvent, useState } from 'react';
+import { useRef } from 'react';
 
 import { useSessionStore } from '@/entities/session/model/session.store';
 import { login } from '@/shared/api';
@@ -11,12 +12,16 @@ import { validateCreds } from '@/shared/lib/validators';
 import Button from '@/shared/ui/Button/Button';
 import Input from '@/shared/ui/Input/Input';
 
+import style from './LoginForm.module.scss';
+
 export default function LoginForm() {
   const router = useRouter();
   const { login: put } = useSessionStore();
 
   const [username, setU] = useState('');
   const [password, setP] = useState('');
+  const usernameRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
   const [errors, setErrors] = useState<{ username?: string; password?: string }>({});
   const [busy, setBusy] = useState(false);
   const [apiError, setApiError] = useState<string | null>(null);
@@ -27,12 +32,17 @@ export default function LoginForm() {
     setErrors(v);
     setApiError(null);
     if (v.username || v.password) {
+      if (v.username && usernameRef.current) {
+        usernameRef.current.focus();
+      } else if (v.password && passwordRef.current) {
+        passwordRef.current.focus();
+      }
       return;
     }
 
     try {
       setBusy(true);
-      const user = await login({ username, password });
+      const user = await login({ username, password: password || '' });
       put(user);
       router.replace(ROUTES.home);
     } catch (err: unknown) {
@@ -47,12 +57,13 @@ export default function LoginForm() {
   }
 
   return (
-    <div style={{ maxWidth: 420, margin: '0 auto' }}>
+    <div className={style.formWrapper}>
       <h1>Login</h1>
       <form onSubmit={onSubmit}>
         <label>
           <span className="srOnly">Username</span>
           <Input
+            ref={usernameRef}
             placeholder="Username"
             value={username}
             onChange={(e) => setU(e.target.value)}
@@ -60,10 +71,11 @@ export default function LoginForm() {
             autoComplete="username"
           />
         </label>
-        <div style={{ height: 12 }} />
+        <div className={style.spacer} />
         <label>
           <span className="srOnly">Password</span>
           <Input
+            ref={passwordRef}
             type="password"
             placeholder="Password"
             value={password}
@@ -72,12 +84,12 @@ export default function LoginForm() {
             autoComplete="current-password"
           />
         </label>
-        <div style={{ height: 12 }} />
+        <div className={style.spacer} />
         <Button type="submit" disabled={busy}>
           {busy ? 'Loading…' : 'Login'}
         </Button>
         {apiError && (
-          <div style={{ color: '#ef4444', marginTop: 10 }} role="alert">
+          <div className={style.apiError} role="alert">
             {apiError}
           </div>
         )}

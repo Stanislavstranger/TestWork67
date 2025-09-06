@@ -1,11 +1,15 @@
 import { Footer, Header } from '@/widget';
 
+import style from './layout.module.scss';
+
 export default async function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <Header variant="auth" />
-      {children}
-      <Footer />
+      <main className={style.wrapper}>
+        <Header variant="auth" />
+        {children}
+        <Footer />
+      </main>
     </>
   );
 }

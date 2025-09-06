@@ -1,1 +1,14 @@
-// LoginForm styles
+.formWrapper {
+  flex: 1;
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+.spacer {
+  height: 12px;
+}
+
+.apiError {
+  margin-top: 10px;
+  color: #ef4444;
+}

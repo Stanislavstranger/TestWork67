@@ -13,7 +13,7 @@ export function Profile() {
 
   if (!user) {
     return (
-      <Link href={ROUTES.singIn} className={style.profile}>
+      <Link href={ROUTES.login} className={style.profile}>
         <User size={14} />
         Login
       </Link>

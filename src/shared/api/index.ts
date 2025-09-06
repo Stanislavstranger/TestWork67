@@ -11,7 +11,11 @@ export const login = async (credentials: {
   password?: string;
 }): Promise<User> => {
   const response = await api.post('/auth/login', credentials);
-  return response.data;
+  const user: User = {
+    ...response.data,
+    token: response.data.accessToken,
+  };
+  return user;
 };
 
 export const getProducts = async (limit = 12): Promise<ProductsResponse> => {

@@ -1,16 +1,25 @@
-import { InputHTMLAttributes } from 'react';
+import clsx from 'clsx';
+import { InputHTMLAttributes, forwardRef } from 'react';
 
-import s from './Input.module.scss';
+import style from './Input.module.scss';
 
 type Props = InputHTMLAttributes<HTMLInputElement> & {
   error?: string;
 };
 
-export default function Input({ error, ...rest }: Props) {
+const Input = forwardRef<HTMLInputElement, Props>(({ error, className, ...rest }, ref) => {
   return (
     <div>
-      <input className={s.input} {...rest} />
-      {error ? <div className={s.error}>{error}</div> : null}
+      <input
+        className={clsx(style.input, className, { [style.error]: error })}
+        ref={ref}
+        {...rest}
+      />
+      {error ? <div className={style.error}>{error}</div> : null}
     </div>
   );
-}
+});
+
+Input.displayName = 'Input';
+
+export default Input;

@@ -81,6 +81,10 @@
   color: #1a1a1a;
   background-color: #fff;
 
+  @include mobile {
+    border-bottom: none;
+  }
+
   .container {
     display: flex;
     align-items: center;
